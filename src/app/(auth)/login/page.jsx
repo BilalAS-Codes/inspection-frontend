@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { apiFetch } from '../../../lib/api';
 import { toast } from 'sonner';
@@ -15,7 +15,7 @@ import { MachineLoader } from '../../../components/machine-loader';
  * Left 55%: Live SVG line-art crane hook swaying above load with amber glint.
  * Right 45%: Precision card with Alliance Infinite mark and high-vis amber button.
  */
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const nextUrl = searchParams.get('next') || '/dashboard';
@@ -280,5 +280,17 @@ export default function LoginPage() {
         }
       `}</style>
     </DraftingGrid>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <MachineLoader scene="crane" size={64} caption="LOADING AUTHENTICATION GATEWAY…" />
+      </div>
+    }>
+      <LoginForm />
+    </Suspense>
   );
 }

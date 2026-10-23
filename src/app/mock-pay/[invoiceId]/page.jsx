@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import { useParams, useRouter, useSearchParams } from 'next/navigation';
 import { apiFetch } from '../../../lib/api';
 import { formatMoney } from '../../../lib/format';
@@ -12,7 +12,7 @@ import { AllianceLogo } from '../../../components/alliance-logo';
 import { CreditCard, CheckCircle2, XCircle, ArrowLeft, ShieldCheck } from 'lucide-react';
 import { toast } from 'sonner';
 
-export default function MockPayPage() {
+function MockPayContent() {
   const params = useParams();
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -203,5 +203,17 @@ export default function MockPayPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function MockPayPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+        <MachineLoader scene="gears" size={64} caption="CONNECTING TO SECURE PAYMENT GATEWAY…" />
+      </div>
+    }>
+      <MockPayContent />
+    </Suspense>
   );
 }
