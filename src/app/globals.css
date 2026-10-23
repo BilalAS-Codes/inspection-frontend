@@ -1,0 +1,391 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ══════════════════════════════════════════════════════════════
+   BASE TOKENS
+   Both the hex tokens (used by custom components) and the HSL
+   tokens (used by shadcn) point to the same warm-stone palette.
+   No drift. One visual language.
+   ══════════════════════════════════════════════════════════════ */
+
+@layer base {
+  :root {
+    color-scheme: light;
+
+    /* ── Surfaces (Executive Midnight & Cool Slate) ────────── */
+    --canvas:     #F1F5F9;  /* slate-100  page background (cards physically pop) */
+    --surface-1:  #F8FAFC;  /* slate-50   sidebar / topbar   */
+    --surface-2:  #FFFFFF;  /* white      elevated cards / panels */
+    --surface-3:  #F1F5F9;  /* slate-100  muted / hover      */
+    --surface-4:  #E2E8F0;  /* slate-200  strong hover / active */
+
+    /* ── Borders (Crisp Structural Borders) ────────────────── */
+    --border:        #CBD5E1;  /* slate-300  crisp structural border */
+    --border-strong: #94A3B8;  /* slate-400  focus / active   */
+
+    /* ── Text (Deep Obsidian Slate & Rich Neutral Gray) ────── */
+    --text:   #0F172A;  /* slate-900  headings / primary data */
+    --text-2: #475569;  /* slate-600  labels / metadata       */
+    --text-3: #64748B;  /* slate-500  placeholder / secondary */
+
+    /* ── Accents ────────────────────────────────────────────── */
+    --amber-fill:  #F59E0B;  /* amber-500  CTA / active       */
+    --amber-text:  #B45309;  /* amber-700  amber copy on bg   */
+    --amber-soft:  #FEF3C7;  /* amber-100  tinted backgrounds */
+    --teal-fill:   #14B8A6;  /* teal-500   verified / live    */
+    --teal-text:   #0D9488;  /* teal-600   teal copy on bg    */
+    --teal-soft:   #CCFBF1;  /* teal-100   tinted backgrounds */
+
+    /* ── Status (industrial muted, not neon) ────────────────── */
+    --status-valid-text:   #047857;  --status-valid-bg:   #ECFDF5;  --status-valid-border:   #A7F3D0;
+    --status-expiring-text:#B45309;  --status-expiring-bg:#FFFBEB;  --status-expiring-border:#FDE68A;
+    --status-expired-text: #BE123C;  --status-expired-bg: #FFF1F2;  --status-expired-border: #FECDD3;
+    --status-neutral-text: #44403C;  --status-neutral-bg: #F5F5F4;  --status-neutral-border: #E7E5E4;
+
+    /* ── Shadows (tinted with stone-900 so they read as warmth,
+          not as gray smudges) ─────────────────────────────── */
+    --shadow-whisper: 0 1px 2px rgba(28, 25, 23, 0.04);
+    --shadow-raised:  0 2px 4px rgba(28, 25, 23, 0.06), 0 1px 2px rgba(28, 25, 23, 0.04);
+    --shadow-popover: 0 8px 24px rgba(28, 25, 23, 0.08), 0 2px 6px rgba(28, 25, 23, 0.04);
+    --shadow-modal:   0 16px 48px rgba(28, 25, 23, 0.12), 0 4px 12px rgba(28, 25, 23, 0.06);
+
+    /* ── Focus ring ─────────────────────────────────────────── */
+    --ring:        #F59E0B;   /* amber-500 */
+    --ring-offset: #FAFAF9;   /* matches canvas, so the ring sits
+                                 naturally on any surface */
+
+    /* ── Radius ─────────────────────────────────────────────── */
+    --radius: 6px;
+
+    /* ══════════════════════════════════════════════════════════
+       SHADCN HSL BRIDGE
+       These mirror the hex tokens above 1:1. If you change a hex
+       token, change its HSL mirror in the same commit.
+       ══════════════════════════════════════════════════════════ */
+    --background:            40 10% 98%;   /* ≈ #FAFAF9 */
+    --foreground:            24 10% 10%;   /* ≈ #1C1917 */
+    --card:                   0  0% 100%;  /* #FFFFFF */
+    --card-foreground:       24 10% 10%;
+    --popover:                0  0% 100%;
+    --popover-foreground:    24 10% 10%;
+    --primary:               38 92% 50%;   /* #F59E0B */
+    --primary-foreground:    24 10% 10%;   /* dark text on amber */
+    --secondary:             40  6% 96%;   /* #F5F5F4 */
+    --secondary-foreground:  24 10% 10%;
+    --muted:                 40  6% 96%;
+    --muted-foreground:      25  5% 45%;   /* #78716C */
+    --accent:                40  6% 96%;
+    --accent-foreground:     24 10% 10%;
+    --destructive:          347 77% 50%;   /* #E11D48 */
+    --destructive-foreground: 0  0% 100%;
+    --border-hsl:            20  6% 90%;   /* #E7E5E4 */
+    --input:                 20  6% 90%;
+    --ring-hsl:              38 92% 50%;
+
+    /* ── Charts (Recharts / visx) ───────────────────────────── */
+    --chart-1: 38 92% 50%;    /* amber   — actual / hero series   */
+    --chart-2: 173 80% 40%;   /* teal    — verified / secondary   */
+    --chart-3: 25 5% 45%;     /* stone-500 — baseline / projected */
+    --chart-4: 24 5% 64%;     /* stone-400 — tertiary             */
+    --chart-5: 20 6% 90%;     /* stone-200 — grid / muted         */
+  }
+
+  /* ══════════════════════════════════════════════════════════
+     DARK — peer mode, cooler temperature ("monitor glow").
+     Dark reads as instrument panel, not paper. This is
+     intentional; Linear and Arc do the same.
+     ══════════════════════════════════════════════════════════ */
+  .dark {
+    color-scheme: dark;
+
+    /* ── Surfaces (near-black, subtle blue tint) ───────────── */
+    --canvas:     #08090B;
+    --surface-1:  #0E1013;
+    --surface-2:  #14171B;
+    --surface-3:  #1A1E23;
+    --surface-4:  #22272E;
+
+    /* ── Borders ────────────────────────────────────────────── */
+    --border:        #22272E;
+    --border-strong: #2E343D;
+
+    /* ── Text ───────────────────────────────────────────────── */
+    --text:   #F2F4F6;
+    --text-2: #9AA4AF;
+    --text-3: #5C6670;
+
+    /* ── Accents ────────────────────────────────────────────── */
+    --amber-fill: #F5A524;  --amber-text: #F5A524;  --amber-soft: rgba(245, 165, 36, 0.12);
+    --teal-fill:  #2DD4BF;  --teal-text:  #2DD4BF;  --teal-soft:  rgba(45, 212, 191, 0.12);
+
+    /* ── Status ─────────────────────────────────────────────── */
+    --status-valid-text:   #34D399; --status-valid-bg:   rgba(6, 78, 59, 0.35);   --status-valid-border:   rgba(5, 150, 105, 0.5);
+    --status-expiring-text:#FBBF24; --status-expiring-bg:rgba(120, 53, 15, 0.35); --status-expiring-border:rgba(217, 119, 6, 0.5);
+    --status-expired-text: #FB7185; --status-expired-bg: rgba(136, 19, 55, 0.35); --status-expired-border: rgba(225, 29, 72, 0.5);
+    --status-neutral-text: #94A3B8; --status-neutral-bg: rgba(26, 30, 35, 0.5);   --status-neutral-border: #334155;
+
+    /* ── Shadows (heavier, cooler) ──────────────────────────── */
+    --shadow-whisper: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-raised:  0 2px 6px rgba(0, 0, 0, 0.35), 0 1px 2px rgba(0, 0, 0, 0.25);
+    --shadow-popover: 0 8px 24px rgba(0, 0, 0, 0.5), 0 2px 6px rgba(0, 0, 0, 0.3);
+    --shadow-modal:   0 20px 50px rgba(0, 0, 0, 0.6), 0 4px 12px rgba(0, 0, 0, 0.4);
+
+    /* ── Focus ring ─────────────────────────────────────────── */
+    --ring:        #F5A524;
+    --ring-offset: #08090B;
+
+    /* ── shadcn HSL mirror ──────────────────────────────────── */
+    --background:            220 15% 4%;
+    --foreground:            210 10% 96%;
+    --card:                  216 15% 6%;
+    --card-foreground:       210 10% 96%;
+    --popover:               214 14% 8%;
+    --popover-foreground:    210 10% 96%;
+    --primary:               37 91% 55%;
+    --primary-foreground:    24 10% 10%;
+    --secondary:             214 8% 12%;
+    --secondary-foreground:  210 10% 96%;
+    --muted:                 214 8% 12%;
+    --muted-foreground:      214 10% 65%;
+    --accent:                214 8% 12%;
+    --accent-foreground:     210 10% 96%;
+    --destructive:           347 77% 55%;
+    --destructive-foreground: 0 0% 100%;
+    --border-hsl:            215 7% 16%;
+    --input:                 215 7% 16%;
+    --ring-hsl:              37 91% 55%;
+
+    /* ── Charts (dark) ──────────────────────────────────────── */
+    --chart-1: 37 91% 55%;    /* amber   */
+    --chart-2: 173 80% 46%;   /* teal    */
+    --chart-3: 214 10% 65%;   /* stone   */
+    --chart-4: 214 10% 45%;   /* darker  */
+    --chart-5: 215 7% 16%;    /* grid    */
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   BASE ELEMENTS
+   ══════════════════════════════════════════════════════════════ */
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    color: var(--text);
+    background-color: var(--canvas);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+    transition: background-color 150ms ease-out, color 150ms ease-out;
+    min-height: 100vh;
+  }
+
+  /* Tabular nums scoped — only where data aligns in columns */
+  table,
+  .font-mono,
+  .tabular,
+  input[type="number"],
+  input[type="date"],
+  input[type="datetime-local"] {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Brand selection color */
+  ::selection {
+    background-color: var(--amber-soft);
+    color: var(--text);
+  }
+  .dark ::selection {
+    background-color: rgba(245, 165, 36, 0.3);
+    color: var(--text);
+  }
+
+  /* Placeholder — softer than text-3, still legible */
+  ::placeholder {
+    color: var(--text-3);
+    opacity: 1;
+  }
+
+  /* Focus — every interactive element must show it */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: var(--radius);
+  }
+
+  /* Reduced motion — respect it everywhere */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════
+   UTILITIES
+   ══════════════════════════════════════════════════════════════ */
+
+/* ── Drafting grid — much fainter than before (was 0.35) ──── */
+.drafting-grid-bg {
+  background-size: 24px 24px;
+  background-image:
+    linear-gradient(to right, rgba(214, 211, 209, 0.18) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(214, 211, 209, 0.18) 1px, transparent 1px);
+}
+.dark .drafting-grid-bg {
+  background-image:
+    linear-gradient(to right, rgba(46, 52, 61, 0.25) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(46, 52, 61, 0.25) 1px, transparent 1px);
+}
+
+/* ── Registration marks (corner crop marks) ───────────────── */
+.reg-marks {
+  position: relative;
+}
+.reg-marks::before,
+.reg-marks::after {
+  content: "";
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  pointer-events: none;
+  opacity: 0.5;
+}
+.reg-marks::before {
+  top: -4px; left: -4px;
+  border-top: 1px solid var(--border-strong);
+  border-left: 1px solid var(--border-strong);
+}
+.reg-marks::after {
+  bottom: -4px; right: -4px;
+  border-bottom: 1px solid var(--border-strong);
+  border-right: 1px solid var(--border-strong);
+}
+
+/* ── Fade-out hairline ────────────────────────────────────── */
+.fade-rule {
+  height: 1px;
+  background: linear-gradient(90deg, var(--border) 0%, var(--border) 80%, transparent 100%);
+}
+
+/* ── Specimen labels (FIG. 01, SEC. 03) ───────────────────── */
+.specimen-label {
+  font-family: var(--font-mono, ui-monospace);
+  font-size: 10px;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* ── Status chips ─────────────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 8px;
+  font-family: var(--font-mono, ui-monospace);
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  border-radius: 6px;
+  border: 1px solid;
+}
+.chip-valid    { color: var(--status-valid-text);    background: var(--status-valid-bg);    border-color: var(--status-valid-border); }
+.chip-expiring { color: var(--status-expiring-text); background: var(--status-expiring-bg); border-color: var(--status-expiring-border); }
+.chip-expired  { color: var(--status-expired-text);  background: var(--status-expired-bg);  border-color: var(--status-expired-border); }
+.chip-neutral  { color: var(--status-neutral-text);  background: var(--status-neutral-bg);  border-color: var(--status-neutral-border); }
+
+/* ── Hazard stripes (verification hero) ───────────────────── */
+.hazard-stripe-valid    { background-image: repeating-linear-gradient(45deg, rgba(4, 120, 87, 0.035),  rgba(4, 120, 87, 0.035)  8px, transparent 8px, transparent 16px); }
+.hazard-stripe-expiring { background-image: repeating-linear-gradient(45deg, rgba(180, 83, 9, 0.04),   rgba(180, 83, 9, 0.04)   8px, transparent 8px, transparent 16px); }
+.hazard-stripe-expired  { background-image: repeating-linear-gradient(45deg, rgba(190, 18, 60, 0.04),  rgba(190, 18, 60, 0.04)  8px, transparent 8px, transparent 16px); }
+.hazard-stripe-neutral  { background-image: repeating-linear-gradient(45deg, rgba(68, 64, 60, 0.035),  rgba(68, 64, 60, 0.035)  8px, transparent 8px, transparent 16px); }
+
+/* ── QR scan-line ─────────────────────────────────────────── */
+@keyframes qrScan {
+  0%   { top: 0%;   opacity: 0; }
+  10%  { opacity: 1; }
+  90%  { opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+.animate-qr-scan {
+  animation: qrScan 1.2s ease-in-out forwards;
+}
+
+/* ── Scrollbars (thin, warm, unobtrusive) ─────────────────── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+  border: 2px solid var(--canvas);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-3);
+}
+
+/* ── Odometer container ───────────────────────────────────── */
+.odometer-digit {
+  display: inline-block;
+  overflow: hidden;
+  height: 1.15em;
+  line-height: 1.15em;
+  vertical-align: bottom;
+}
+
+/* ── Ambient canvas (subtler than before) ─────────────────── */
+.ambient-canvas {
+  background-color: var(--canvas);
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245, 158, 11, 0.025), transparent 70%),
+    radial-gradient(circle at 1px 1px, rgba(168, 162, 158, 0.14) 1px, transparent 0);
+  background-size: 100% 100%, 24px 24px;
+}
+.dark .ambient-canvas {
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(245, 165, 36, 0.06), transparent 70%),
+    radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.035) 1px, transparent 0);
+}
+
+/* ── Hologram scanline ────────────────────────────────────── */
+@keyframes scanline {
+  0%   { top: 0%;   opacity: 0.7; }
+  50%  { opacity: 1; }
+  100% { top: 100%; opacity: 0.7; }
+}
+.animate-scanline { animation: scanline 2.2s ease-in-out infinite alternate; }
+
+/* ── Radar sweep ──────────────────────────────────────────── */
+@keyframes radarSweep {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.animate-radar { animation: radarSweep 3s linear infinite; }
+
+/* ── Audio wave bars ──────────────────────────────────────── */
+@keyframes waveBar {
+  0%, 100% { height: 4px; }
+  50%      { height: 16px; }
+}
+.animate-wave-1 { animation: waveBar 1.2s ease-in-out infinite; }
+.animate-wave-2 { animation: waveBar 0.9s ease-in-out infinite 0.2s; }
+.animate-wave-3 { animation: waveBar 1.4s ease-in-out infinite 0.4s; }
+.animate-wave-4 { animation: waveBar 1.1s ease-in-out infinite 0.1s; }
