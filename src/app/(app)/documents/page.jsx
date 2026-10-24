@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { apiFetch } from '../../../lib/api';
+import { apiFetch, getFileUrl } from '../../../lib/api';
 import { formatDate, formatRelativeExpiry } from '../../../lib/format';
 import { StatusBadge } from '../../../components/status-badge';
 import { PageHeader } from '../../../components/page-header';
@@ -344,7 +344,7 @@ export default function DocumentsPage() {
                         <div className="flex items-center justify-end gap-1.5">
                           {doc.fileUrl && (
                             <a
-                              href={doc.fileUrl}
+                              href={getFileUrl(doc.fileUrl)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="h-7 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 hover:text-slate-900 dark:text-slate-200 text-[11px] font-semibold inline-flex items-center gap-1 shadow-2xs transition-colors"

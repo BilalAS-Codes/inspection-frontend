@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { apiFetch } from '../../../../lib/api';
+import { apiFetch, API_BASE_URL } from '../../../../lib/api';
 import { formatDate, formatDateTime } from '../../../../lib/format';
 import { StatusBadge } from '../../../../components/status-badge';
 import { RegistrationMarks, SpecimenLabel, FadeRule } from '../../../../components/engineering';
@@ -889,7 +889,7 @@ export default function WorkOrderDetailPage() {
                     title="Hover to simulate optical inspection scan"
                   >
                     <img
-                      src={`http://localhost:4000/api/certificates/${cert.id}/qr.png`}
+                      src={`${API_BASE_URL}/api/certificates/${cert.id}/qr.png`}
                       alt="Certificate QR"
                       className="w-full h-full object-contain"
                     />
@@ -911,7 +911,7 @@ export default function WorkOrderDetailPage() {
                 {/* Download PDF & Revoke Buttons */}
                 <div className="pt-2 space-y-2">
                   <a
-                    href={`http://localhost:4000/api/certificates/${cert.id}/pdf`}
+                    href={`${API_BASE_URL}/api/certificates/${cert.id}/pdf`}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="w-full h-9 rounded-xl border border-border bg-surface-1 hover:bg-surface-2 text-slate-900 dark:text-white text-xs font-mono font-semibold flex items-center justify-center gap-2 shadow-xs transition-all hover:border-amber-500/40"

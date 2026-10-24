@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { apiFetch } from '../../../lib/api';
+import { apiFetch, API_BASE_URL } from '../../../lib/api';
 import { formatDate } from '../../../lib/format';
 import { StatusBadge } from '../../../components/status-badge';
 import { PageHeader } from '../../../components/page-header';
@@ -138,7 +138,7 @@ export default function CertificatesPage() {
                         className="w-8 h-8 mx-auto rounded-lg border border-slate-300 dark:border-slate-700 bg-white p-0.5 cursor-pointer shadow-2xs relative flex items-center justify-center hover:scale-105 transition-transform"
                       >
                         <img
-                          src={`http://localhost:4000/api/certificates/${cert.id}/qr.png`}
+                          src={`${API_BASE_URL}/api/certificates/${cert.id}/qr.png`}
                           alt="QR"
                           className="w-full h-full object-contain"
                         />
@@ -147,7 +147,7 @@ export default function CertificatesPage() {
                         {hoveredQrId === cert.id && (
                           <div className="pointer-events-none absolute left-10 top-1/2 -translate-y-1/2 z-30 w-[120px] h-[120px] rounded-xl border border-slate-300 dark:border-slate-700 bg-white p-1.5 shadow-xl animate-in fade-in-0 zoom-in-95 duration-100">
                             <img
-                              src={`http://localhost:4000/api/certificates/${cert.id}/qr.png`}
+                              src={`${API_BASE_URL}/api/certificates/${cert.id}/qr.png`}
                               alt="Enlarged QR"
                               className="w-full h-full object-contain"
                             />
@@ -193,7 +193,7 @@ export default function CertificatesPage() {
                         </button>
 
                         <a
-                          href={`http://localhost:4000/api/certificates/${cert.id}/pdf`}
+                          href={`${API_BASE_URL}/api/certificates/${cert.id}/pdf`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="h-7 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 hover:text-slate-900 dark:text-slate-200 text-[11px] font-semibold inline-flex items-center gap-1 shadow-2xs transition-colors"
@@ -240,7 +240,7 @@ export default function CertificatesPage() {
             {/* QR Image Frame */}
             <div className="flex justify-center p-4 bg-white rounded-xl border border-slate-300 dark:border-slate-700 shadow-xs">
               <img
-                src={`http://localhost:4000/api/certificates/${selectedQrCert.id}/qr.png`}
+                src={`${API_BASE_URL}/api/certificates/${selectedQrCert.id}/qr.png`}
                 alt="Certificate QR"
                 className="h-44 w-44"
               />

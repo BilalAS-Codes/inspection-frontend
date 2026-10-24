@@ -1,4 +1,24 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:4000';
+export const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+
+/**
+ * Resolves a public asset / file / document URL so it points to the active API backend
+ * even if stored or returned with localhost or relative path.
+ *
+ * @param {string} rawUrl
+ * @returns {string}
+ */
+export function getFileUrl(rawUrl) {
+  if (!rawUrl) return '';
+  // If it's a relative path e.g. "/files/..." or "/api/..."
+  if (rawUrl.startsWith('/')) {
+    return `${API_BASE_URL}${rawUrl}`;
+  }
+  // If backend returned a localhost/127.0.0.1 URL but frontend is in production
+  if (rawUrl.includes('localhost:4000') || rawUrl.includes('127.0.0.1:4000')) {
+    return rawUrl.replace(/^https?:\/\/(localhost|127\.0\.0\.1):4000/, API_BASE_URL);
+  }
+  return rawUrl;
+}
 
 /**
  * Standard HTTP fetch client with cookie credentials and structured error handling.

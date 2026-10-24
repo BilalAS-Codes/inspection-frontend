@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { apiFetch } from '../../../lib/api';
+import { apiFetch, getFileUrl } from '../../../lib/api';
 import { formatDate, formatMoney } from '../../../lib/format';
 import { StatusBadge } from '../../../components/status-badge';
 import { EmptyState } from '../../../components/empty-state';
@@ -362,7 +362,7 @@ export default function ProposalsPage() {
 
                           {p.pdfUrl && (
                             <a
-                              href={p.pdfUrl}
+                              href={getFileUrl(p.pdfUrl)}
                               target="_blank"
                               rel="noopener noreferrer"
                               className="h-7 px-3 rounded-lg border border-slate-300 dark:border-slate-700 bg-white hover:bg-slate-50 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 hover:text-slate-900 dark:text-slate-200 text-[11px] font-semibold inline-flex items-center gap-1 shadow-2xs transition-colors"

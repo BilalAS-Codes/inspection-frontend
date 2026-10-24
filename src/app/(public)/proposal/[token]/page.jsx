@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { apiFetch } from '../../../../lib/api';
+import { apiFetch, getFileUrl } from '../../../../lib/api';
 import { formatDate, formatMoney } from '../../../../lib/format';
 import { StatusBadge } from '../../../../components/status-badge';
 import { AllianceLogo } from '../../../../components/alliance-logo';
@@ -143,7 +143,7 @@ export default function PublicProposalPage() {
                 </span>
                 {data?.pdfUrl && (
                   <a
-                    href={data.pdfUrl}
+                    href={getFileUrl(data.pdfUrl)}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-amber-700 dark:text-amber-400 hover:underline"
@@ -155,7 +155,7 @@ export default function PublicProposalPage() {
 
               {data?.pdfUrl ? (
                 <iframe
-                  src={data.pdfUrl}
+                  src={getFileUrl(data.pdfUrl)}
                   className="w-full h-[580px] border-0 bg-surface-2/40"
                   title="Proposal PDF Document"
                 />
